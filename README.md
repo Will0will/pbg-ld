@@ -4,6 +4,13 @@
 
 This software provides semantically integrated genotypic/phenotypic data on plants to enable ranking of candidate genes associated with traits of interest (e.g. fruit ripening in tomato).
 
+## Prerequisites
+- [GNU Make](https://www.gnu.org/software/make/)
+- [Docker CE](https://docs.docker.com/install/)
+- [cURL](https://curl.haxx.se/)
+
+## Installation
+
 **1. Clone this git repo.**
 
 `git clone https://github.com/candYgene/pbg-ld.git`
