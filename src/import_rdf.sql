@@ -17,7 +17,7 @@ SELECT * FROM DB.DBA.load_list ;
 -- load RDF files
 rdf_loader_run(log_enable=>$u{LOG_LEVEL}) ;
 
-count triples per named graph
+-- count triples per named graph
 SPARQL SELECT
    ?g COUNT(*) AS ?n
 WHERE {
