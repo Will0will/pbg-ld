@@ -1,8 +1,5 @@
-http://solgenomics.net/genome/Solanum_lycopersicum
-http://solgenomics.net/genome/Solanum_pennellii
-http://plants.ensembl.org/Solanum_lycopersicum
-http://www.uniprot.org/proteomes/Solanum_lycopersicum
-http://europepmc.org/articles
+http://plants.ensembl.org/arabidopsis_thaliana
+http://www.uniprot.org/proteomes/arabidopsis_thaliana
 http://biohackathon.org/resource/faldo.rdf
 http://purl.obolibrary.org/obo/so.owl
 http://semanticscience.org/ontology/sio.owl
@@ -11,5 +8,4 @@ http://purl.obolibrary.org/obo/go.owl
 http://purl.uniprot.org/core/
 http://purl.obolibrary.org/obo/po.owl
 http://purl.obolibrary.org/obo/to.owl
-http://purl.bioontology.org/ontology/SPTO
-http://purl.obolibrary.org/obo/pato.owl
+http://www.geneontology.com/ontology/subset/goslim_generic.owl

@@ -38,20 +38,17 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o po.rdf "http://purl.obolibr
 curl --stderr - -LH "Accept: application/rdf+xml" -o to.rdf "http://purl.obolibrary.org/obo/to.owl" \
         && echo "http://purl.obolibrary.org/obo/to.owl" > to.rdf.graph
 
-curl --stderr - -LH "Accept: application/rdf+xml" -o pato.rdf "http://purl.obolibrary.org/obo/pato.owl" \
-        && echo "http://purl.obolibrary.org/obo/pato.owl" > pato.rdf.graph
+curl --stderr - -LH "Accept: application/rdf+xml" -o goslim_generic.rdf "http://current.geneontology.org/ontology/subsets/goslim_generic.owl" \
+	&& echo "http://geneontology.com/ontology/subset/goslim_generic.owl" > goslim_generic.rdf.graph
 
-curl --stderr - -LH "Accept: application/rdf+xml" -o spto.rdf "http://data.bioontology.org/ontologies/SPTO/download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb&download_format=rdf" \
-        && echo "http://purl.bioontology.org/ontology/SPTO" > spto.rdf.graph
+# download arabidopsis genome and proteome from Ensembl Plants and UniProt Reference Proteomes, respectively
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/arabidopsis_thaliana/arabidopsis_thaliana.ttl.gz" \
+	&& echo "http://plants.ensembl.org/arabidopsis_thaliana" > arabidopsis_thaliana.ttl.graph
 
-# download tomato genome and proteome from Ensembl Plants and UniProt Reference Proteomes, respectively
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum.ttl.gz" \
-	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum.ttl.graph
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/arabidopsis_thaliana/arabidopsis_thaliana_xrefs.ttl.gz" \
+	&& echo "http://plants.ensembl.org/arabidopsis_thaliana" > arabidopsis_thaliana_xrefs.ttl.graph
 
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum_xrefs.ttl.gz" \
-	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum_xrefs.ttl.graph
-
-curl --stderr - -L -o uniprot_tomato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994" \
-	&& echo "http://www.uniprot.org/proteomes/Solanum_lycopersicum" > uniprot_tomato.rdf.graph
+curl --stderr - -L -o uniprot_arabidopsis.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000006548" \
+	&& echo "http://uniprot.org/proteomes/arabidopsis_thaliana" > uniprot_arabidopsis.rdf.graph
 
 gzip *.rdf
