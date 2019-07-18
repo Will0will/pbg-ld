@@ -10,6 +10,8 @@ CONTAINER_NAME = virtuoso
 CONTAINER_PORT = 8890
 DATA_DIR = data
 
+
+
 all: pull-image start-srv install-pkgs get-rdf import-rdf update-rdf post-install
 
 pull-image:
@@ -33,6 +35,7 @@ install-pkgs:
 
 get-rdf:
 	./get_rdf.sh $(DATA_DIR)
+	./get_kegg_rdf.sh $(DATA_DIR) 
 
 import-rdf:
 	#tar xvzf ../data/*.tar.gz -C ../data && mv ../data/rdf/* $(DATA_DIR)
