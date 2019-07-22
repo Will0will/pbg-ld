@@ -34,7 +34,7 @@ install-pkgs:
 	docker exec $(CONTAINER_NAME) $(VOS) install_pkgs.sql
 
 get-rdf:
-	./get_rdf.sh $(DATA_DIR)
+	#./get_rdf.sh $(DATA_DIR)
 	./get_kegg_rdf.sh $(DATA_DIR) 
 
 import-rdf:

@@ -24,6 +24,7 @@ echo "@prefix ko: <http://purl.uniprot.org/ko/>	.
 @prefix rn: <http://www.kegg.jp/entry/>	.
 @prefix sio: <http://semanticscience.org/resource/>	.
 @prefix path: <http://www.kegg.jp/entry/>	.
+@prefix ath: <http://purl.uniprot.org/kegg/ath:>	.
 "  > tmp_kegg/prefix_head.kegg
 
 # Attention: the queiried info containes double quotes (")
@@ -33,7 +34,7 @@ split($1,res,":"); \
 split($2,res_2,";"); \
 gsub("\"", "'\'\''", res_2[2]); \ 
 print $1 "\tdc:identifier\t\"" res[2] "\"^^string\t;\n" \
-"\t\trdf:label\t\"" res_2[1] "\"^^string\t;\n" \
+"\t\trdfs:label\t\"" res_2[1] "\"^^string\t;\n" \
 "\t\tdc:description\t\"" res_2[2] "\"^^string\t."\
 }'  > tmp_kegg/ko.kegg
 
@@ -57,10 +58,15 @@ curl http://rest.kegg.jp/link/reaction/ko | awk -F"\t" '{\
 print $1 "\tsio:SIO_000068\t" $2 "\t."\
 }' > tmp_kegg/ko_to_reaction.kegg
 
-curl http://rest.kegg.jp/link/path/reaction| awk -F"\t" \
+curl http://rest.kegg.jp/link/path/reaction | awk -F"\t" \
 'NR%2 ==1 {\
 print $1 "\tsio:SIO_000068\t" $2 "\t."\
 }' > tmp_kegg/reaction_to_pathway.kegg
+
+curl http://rest.kegg.jp/link/pathway/ath | awk -F"\t" '{
+gsub("path:ath", "path:map", $2);
+print $1 "\tsio:SIO_000062\t" $2 "\t."
+}' >  tmp_kegg/gene_to_pathway.kegg
 
 
 # curl http://rest.kegg.jp/link/ko/ath  | awk -F"\t" '{\
@@ -68,7 +74,9 @@ print $1 "\tsio:SIO_000068\t" $2 "\t."\
 # }' > tmp_kegg/gene_to_ko.ttl
 # cat ko_description | grep '\[EC:.*\]' | sed 's/\t.*\[EC:/\t/g' | sed 's/\]//g' | awk -F"\t" '{n=split($2,res_arr," "); for(i=1; i<n; i++){print $1 "\tsio:SIO_000283\tec:" res_arr[i] }}' > tmp_kegg/ko_to_ec.ttl
 
-cat tmp_kegg/prefix_head.kegg tmp_kegg/ko.kegg tmp_kegg/rn.kegg tmp_kegg/pathway.kegg tmp_kegg/ko_to_reaction.kegg tmp_kegg/reaction_to_pathway.kegg > kegg_pathway.ttl
+cat tmp_kegg/prefix_head.kegg tmp_kegg/ko.kegg tmp_kegg/rn.kegg tmp_kegg/pathway.kegg \
+tmp_kegg/ko_to_reaction.kegg tmp_kegg/reaction_to_pathway.kegg tmp_kegg/gene_to_pathway.kegg > kegg_pathway.ttl
+
 gzip kegg_pathway.ttl
 echo "http://www.kegg.jp/rest_api" > kegg_pathway.ttl.graph
 
