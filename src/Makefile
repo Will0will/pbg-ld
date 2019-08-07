@@ -36,7 +36,7 @@ install-pkgs:
 get-rdf:
 	./get_rdf.sh $(DATA_DIR)
 	./get_kegg_rdf.sh $(DATA_DIR) 
-	mv ../data/* $(DATA_DIR) 
+	cp ../data/* $(DATA_DIR) 
 
 import-rdf:
 	sed -i.org "s:__DATA_DIR__:$(DATA_DIR):" import_rdf.sql

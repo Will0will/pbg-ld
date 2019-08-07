@@ -7,7 +7,6 @@
 set -e
 
 DATA_DIR=$1
-tmp_kegg_DATA_DIR=$2 
 
 if [ "${DATA_DIR}" != "" ]; then
 	mkdir -p $DATA_DIR && cd $DATA_DIR
@@ -25,6 +24,7 @@ echo "@prefix ko: <http://purl.uniprot.org/ko/>	.
 @prefix sio: <http://semanticscience.org/resource/>	.
 @prefix path: <http://www.kegg.jp/entry/>	.
 @prefix ath: <http://purl.uniprot.org/kegg/ath:>	.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>	. 
 "  > tmp_kegg/prefix_head.kegg
 
 # Attention: the queiried info containes double quotes (")
