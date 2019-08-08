@@ -32,7 +32,7 @@ echo "@prefix ko: <http://purl.uniprot.org/ko/>	.
 curl  http://rest.kegg.jp/list/ko | awk -F"\t" '{\
 split($1,res,":"); \
 split($2,res_2,";"); \
-gsub("\"", "'\'\''", res_2[2]); \ 
+gsub("\"", "'\'\''", res_2[2]); \
 print $1 "\tdc:identifier\t\"" res[2] "\"^^string\t;\n" \
 "\t\trdfs:label\t\"" res_2[1] "\"^^string\t;\n" \
 "\t\tdc:description\t\"" res_2[2] "\"^^string\t."\
